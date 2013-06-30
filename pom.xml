@@ -11,7 +11,7 @@
     <packaging>jar</packaging>
     <groupId>org.webjars</groupId>
     <artifactId>ckeditor</artifactId>
-    <version>4.1.2-SNAPSHOT</version>
+    <version>4.1.2</version>
     <name>CKEditor</name>
     <description>WebJar for CKEditor</description>
     <url>http://webjars.org</url>
@@ -46,7 +46,7 @@
         <url>http://github.com/webjars/ckeditor</url>
         <connection>scm:git:https://github.com/webjars/ckeditor.git</connection>
         <developerConnection>scm:git:https://github.com/webjars/ckeditor.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>ckeditor-4.1.2</tag>
     </scm>
     
     <properties>
