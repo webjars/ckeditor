@@ -11,16 +11,16 @@
     <packaging>jar</packaging>
     <groupId>org.webjars</groupId>
     <artifactId>ckeditor</artifactId>
-    <version>4.4.2-SNAPSHOT</version>
+    <version>4.4.6-SNAPSHOT</version>
     <name>CKEditor</name>
     <description>WebJar for CKEditor</description>
     <url>http://webjars.org</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <upstream.version>4.4.1</upstream.version>
+        <upstream.version>4.4.6</upstream.version>
         <upstream.url>http://download.cksource.com/CKEditor/CKEditor/CKEditor%20${upstream.version}</upstream.url>
-        <destDir>${project.build.outputDirectory}/META-INF/resources/webjars/${project.artifactId}/${upstream.version}</destDir>
+        <destDir>${project.build.outputDirectory}/META-INF/resources/webjars/${project.artifactId}/${project.version}</destDir>
     </properties>
 
     <developers>
@@ -59,25 +59,7 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>wagon-maven-plugin</artifactId>
-                <version>1.0-beta-4</version>
-                <executions>
-                    <execution>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>download-single</goal>
-                        </goals>
-                        <configuration>
-                            <url>${upstream.url}</url>
-                            <fromFile>ckeditor_${upstream.version}_full.zip</fromFile>
-                            <toFile>${project.build.directory}/${project.artifactId}.zip</toFile>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
                 <version>1.7</version>
                 <executions>
@@ -86,26 +68,42 @@
                         <goals><goal>run</goal></goals>
                         <configuration>
                             <target>
-                                <echo message="unzip archive" />
-                                <unzip src="${project.build.directory}/${project.artifactId}.zip" dest="${project.build.directory}" />
+                                <mkdir dir="${destDir}" />
+                                <get src="${upstream.url}/ckeditor_${upstream.version}_basic.zip" dest="${project.build.directory}/${project.artifactId}-basic.zip" />
+                                <get src="${upstream.url}/ckeditor_${upstream.version}_standard.zip" dest="${project.build.directory}/${project.artifactId}-standard.zip" />
+                                <get src="${upstream.url}/ckeditor_${upstream.version}_full.zip" dest="${project.build.directory}/${project.artifactId}-full.zip" />
+                                <echo message="unzip archives" />
+                                <unzip src="${project.build.directory}/${project.artifactId}-basic.zip" dest="${project.build.directory}/basic" />
+                                <unzip src="${project.build.directory}/${project.artifactId}-standard.zip" dest="${project.build.directory}/standard" />
+                                <unzip src="${project.build.directory}/${project.artifactId}-full.zip" dest="${project.build.directory}/full" />
+
                                 <echo message="moving resources" />
-                                <move todir="${destDir}">
-                                    <fileset dir="${project.build.directory}/ckeditor" />
+                                <move todir="${destDir}/basic">
+                                    <fileset dir="${project.build.directory}/basic/ckeditor" excludes="samples/"/>
                                 </move>
+                                <move todir="${destDir}/standard">
+                                    <fileset dir="${project.build.directory}/standard/ckeditor" excludes="samples/"/>
+                                </move>
+                                <move todir="${destDir}/full">
+                                    <fileset dir="${project.build.directory}/full/ckeditor" excludes="samples/"/>
+                                </move>
+
                             </target>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>2.5</version>
+                <version>2.5.1</version>
             </plugin>
+
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.5.1</version>
+                <version>1.6.5</version>
                 <extensions>true</extensions>
                 <configuration>
                     <serverId>sonatype-nexus-staging</serverId>
