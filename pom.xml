@@ -21,6 +21,15 @@
         <upstream.version>4.4.7</upstream.version>
         <upstream.url>http://download.cksource.com/CKEditor/CKEditor/CKEditor%20${upstream.version}</upstream.url>
         <destDir>${project.build.outputDirectory}/META-INF/resources/webjars/${project.artifactId}/${project.version}</destDir>
+        <requirejs>
+            {
+                "paths": {
+                    "ckeditor-full": "full/ckeditor",
+                    "ckeditor-standard": "standard/ckeditor",
+                    "ckeditor-basic": "basic/ckeditor"
+                }
+            }
+        </requirejs>
     </properties>
 
     <developers>
