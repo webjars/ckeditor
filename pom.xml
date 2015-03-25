@@ -11,7 +11,7 @@
     <packaging>jar</packaging>
     <groupId>org.webjars</groupId>
     <artifactId>ckeditor</artifactId>
-    <version>4.4.8-SNAPSHOT</version>
+    <version>4.4.7-1-SNAPSHOT</version>
     <name>CKEditor</name>
     <description>WebJar for CKEditor</description>
     <url>http://webjars.org</url>
@@ -77,24 +77,24 @@
                         <goals><goal>run</goal></goals>
                         <configuration>
                             <target>
-                                <mkdir dir="${destDir}" />
-                                <get src="${upstream.url}/ckeditor_${upstream.version}_basic.zip" dest="${project.build.directory}/${project.artifactId}-basic.zip" />
-                                <get src="${upstream.url}/ckeditor_${upstream.version}_standard.zip" dest="${project.build.directory}/${project.artifactId}-standard.zip" />
-                                <get src="${upstream.url}/ckeditor_${upstream.version}_full.zip" dest="${project.build.directory}/${project.artifactId}-full.zip" />
-                                <echo message="unzip archives" />
-                                <unzip src="${project.build.directory}/${project.artifactId}-basic.zip" dest="${project.build.directory}/basic" />
-                                <unzip src="${project.build.directory}/${project.artifactId}-standard.zip" dest="${project.build.directory}/standard" />
-                                <unzip src="${project.build.directory}/${project.artifactId}-full.zip" dest="${project.build.directory}/full" />
+                                <mkdir dir="${destDir}"/>
+                                <get src="${upstream.url}/ckeditor_${upstream.version}_basic.zip" dest="${project.build.directory}/${project.artifactId}-basic.zip"/>
+                                <get src="${upstream.url}/ckeditor_${upstream.version}_standard.zip" dest="${project.build.directory}/${project.artifactId}-standard.zip"/>
+                                <get src="${upstream.url}/ckeditor_${upstream.version}_full.zip" dest="${project.build.directory}/${project.artifactId}-full.zip"/>
+                                <echo message="unzip archives"/>
+                                <unzip src="${project.build.directory}/${project.artifactId}-basic.zip" dest="${project.build.directory}/basic"/>
+                                <unzip src="${project.build.directory}/${project.artifactId}-standard.zip" dest="${project.build.directory}/standard"/>
+                                <unzip src="${project.build.directory}/${project.artifactId}-full.zip" dest="${project.build.directory}/full"/>
 
-                                <echo message="moving resources" />
+                                <echo message="moving resources"/>
                                 <move todir="${destDir}/basic">
-                                    <fileset dir="${project.build.directory}/basic/ckeditor" excludes="samples/" />
+                                    <fileset dir="${project.build.directory}/basic/ckeditor" excludes="samples/"/>
                                 </move>
                                 <move todir="${destDir}/standard">
-                                    <fileset dir="${project.build.directory}/standard/ckeditor" excludes="samples/" />
+                                    <fileset dir="${project.build.directory}/standard/ckeditor" excludes="samples/"/>
                                 </move>
                                 <move todir="${destDir}/full">
-                                    <fileset dir="${project.build.directory}/full/ckeditor" excludes="samples/" />
+                                    <fileset dir="${project.build.directory}/full/ckeditor" excludes="samples/"/>
                                 </move>
 
                             </target>
