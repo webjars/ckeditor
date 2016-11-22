@@ -11,15 +11,14 @@
     <packaging>jar</packaging>
     <groupId>org.webjars</groupId>
     <artifactId>ckeditor</artifactId>
-    <version>4.5.9-SNAPSHOT</version>
+    <version>4.5.11-SNAPSHOT</version>
     <name>CKEditor</name>
     <description>WebJar for CKEditor</description>
     <url>http://webjars.org</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <upstream.version>4.5.8</upstream.version>
-        <upstream.url>http://download.cksource.com/CKEditor/CKEditor/CKEditor%20${upstream.version}</upstream.url>
+        <upstream.url>http://download.cksource.com/CKEditor/CKEditor/CKEditor%20${version.unsnapshot}</upstream.url>
         <destDir>${project.build.outputDirectory}/META-INF/resources/webjars/${project.artifactId}/${project.version}</destDir>
         <requirejs>
             {
@@ -68,6 +67,20 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>com.jamesward</groupId>
+                <artifactId>unsnapshot-maven-plugin</artifactId>
+                <version>0.2</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>unsnapshot</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
                 <version>1.7</version>
@@ -78,9 +91,9 @@
                         <configuration>
                             <target>
                                 <mkdir dir="${destDir}" />
-                                <get src="${upstream.url}/ckeditor_${upstream.version}_basic.zip" dest="${project.build.directory}/${project.artifactId}-basic.zip" />
-                                <get src="${upstream.url}/ckeditor_${upstream.version}_standard.zip" dest="${project.build.directory}/${project.artifactId}-standard.zip" />
-                                <get src="${upstream.url}/ckeditor_${upstream.version}_full.zip" dest="${project.build.directory}/${project.artifactId}-full.zip" />
+                                <get src="${upstream.url}/ckeditor_${version.unsnapshot}_basic.zip" dest="${project.build.directory}/${project.artifactId}-basic.zip" />
+                                <get src="${upstream.url}/ckeditor_${version.unsnapshot}_standard.zip" dest="${project.build.directory}/${project.artifactId}-standard.zip" />
+                                <get src="${upstream.url}/ckeditor_${version.unsnapshot}_full.zip" dest="${project.build.directory}/${project.artifactId}-full.zip" />
                                 <echo message="unzip archives" />
                                 <unzip src="${project.build.directory}/${project.artifactId}-basic.zip" dest="${project.build.directory}/basic" />
                                 <unzip src="${project.build.directory}/${project.artifactId}-standard.zip" dest="${project.build.directory}/standard" />
