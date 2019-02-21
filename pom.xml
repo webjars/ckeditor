@@ -11,21 +11,22 @@
     <packaging>jar</packaging>
     <groupId>org.webjars</groupId>
     <artifactId>ckeditor</artifactId>
-    <version>4.11.2-SNAPSHOT</version>
+    <version>11.2.0-SNAPSHOT</version>
     <name>CKEditor</name>
     <description>WebJar for CKEditor</description>
     <url>http://webjars.org</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <upstream.url>http://download.cksource.com/CKEditor/CKEditor/CKEditor%20${version.unsnapshot}</upstream.url>
+        <upstream.url>https://download.cksource.com/CKEditor/CKEditor5/${version.unsnapshot}</upstream.url>
         <destDir>${project.build.outputDirectory}/META-INF/resources/webjars/${project.artifactId}/${project.version}</destDir>
         <requirejs>
             {
                 "paths": {
-                    "ckeditor-full": "full/ckeditor",
-                    "ckeditor-standard": "standard/ckeditor",
-                    "ckeditor-basic": "basic/ckeditor"
+                    "ckeditor-balloon": "balloon/ckeditor",
+                    "ckeditor-classic": "classic/ckeditor",
+                    "ckeditor-document": "document/ckeditor",
+                    "ckeditor-inline": "inline/ckeditor"
                 }
             }
         </requirejs>
@@ -91,25 +92,29 @@
                         <configuration>
                             <target>
                                 <mkdir dir="${destDir}" />
-                                <get src="${upstream.url}/ckeditor_${version.unsnapshot}_basic.zip" dest="${project.build.directory}/${project.artifactId}-basic.zip" />
-                                <get src="${upstream.url}/ckeditor_${version.unsnapshot}_standard.zip" dest="${project.build.directory}/${project.artifactId}-standard.zip" />
-                                <get src="${upstream.url}/ckeditor_${version.unsnapshot}_full.zip" dest="${project.build.directory}/${project.artifactId}-full.zip" />
+                                <get src="${upstream.url}/ckeditor5-build-balloon-${version.unsnapshot}.zip" dest="${project.build.directory}/${project.artifactId}-balloon.zip" />
+                                <get src="${upstream.url}/ckeditor5-build-classic-${version.unsnapshot}.zip" dest="${project.build.directory}/${project.artifactId}-classic.zip" />
+                                <get src="${upstream.url}/ckeditor5-build-decoupled-document-${version.unsnapshot}.zip" dest="${project.build.directory}/${project.artifactId}-decoupled-document.zip" />
+                                <get src="${upstream.url}/ckeditor5-build-inline-${version.unsnapshot}.zip" dest="${project.build.directory}/${project.artifactId}-inline.zip" />
                                 <echo message="unzip archives" />
-                                <unzip src="${project.build.directory}/${project.artifactId}-basic.zip" dest="${project.build.directory}/basic" />
-                                <unzip src="${project.build.directory}/${project.artifactId}-standard.zip" dest="${project.build.directory}/standard" />
-                                <unzip src="${project.build.directory}/${project.artifactId}-full.zip" dest="${project.build.directory}/full" />
+                                <unzip src="${project.build.directory}/${project.artifactId}-balloon.zip" dest="${project.build.directory}" />
+                                <unzip src="${project.build.directory}/${project.artifactId}-classic.zip" dest="${project.build.directory}" />
+                                <unzip src="${project.build.directory}/${project.artifactId}-decoupled-document.zip" dest="${project.build.directory}" />
+                                <unzip src="${project.build.directory}/${project.artifactId}-inline.zip" dest="${project.build.directory}" />
 
                                 <echo message="moving resources" />
-                                <move todir="${destDir}/basic">
-                                    <fileset dir="${project.build.directory}/basic/ckeditor" excludes="samples/" />
+                                <move todir="${destDir}/balloon">
+                                    <fileset dir="${project.build.directory}/ckeditor5-build-balloon" excludes="sample/" />
                                 </move>
-                                <move todir="${destDir}/standard">
-                                    <fileset dir="${project.build.directory}/standard/ckeditor" excludes="samples/" />
+                                <move todir="${destDir}/classic">
+                                    <fileset dir="${project.build.directory}/ckeditor5-build-classic" excludes="sample/" />
                                 </move>
-                                <move todir="${destDir}/full">
-                                    <fileset dir="${project.build.directory}/full/ckeditor" excludes="samples/" />
+                                <move todir="${destDir}/document">
+                                    <fileset dir="${project.build.directory}/ckeditor5-build-decoupled-document" excludes="sample/" />
                                 </move>
-
+                                <move todir="${destDir}/inline">
+                                    <fileset dir="${project.build.directory}/ckeditor5-build-inline" excludes="sample/" />
+                                </move>
                             </target>
                         </configuration>
                     </execution>
