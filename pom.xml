@@ -11,7 +11,7 @@
     <packaging>jar</packaging>
     <groupId>org.webjars</groupId>
     <artifactId>ckeditor</artifactId>
-    <version>4.19.1-SNAPSHOT</version>
+    <version>4.22.1-SNAPSHOT</version>
     <name>CKEditor</name>
     <description>WebJar for CKEditor</description>
     <url>http://webjars.org</url>
@@ -125,7 +125,7 @@
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.5</version>
+                <version>1.6.13</version>
                 <extensions>true</extensions>
                 <configuration>
                     <serverId>sonatype-nexus-staging</serverId>
